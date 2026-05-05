@@ -15,4 +15,3 @@ Walk the Microsoft Foundry model catalog: filter by task, context length, and co
 ## Resources
 
 - Microsoft Learn: [Choose and deploy models in Microsoft Foundry](https://learn.microsoft.com/azure/ai-foundry/concepts/model-catalog).
-- Course outline: [`../../outline.pdf`](../../outline.pdf).

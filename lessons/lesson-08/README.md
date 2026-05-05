@@ -15,4 +15,3 @@ Live deployment of a small chat model from the Foundry catalog into a Foundry pr
 ## Resources
 
 - Microsoft Learn: [Get started with Microsoft Foundry](https://learn.microsoft.com/azure/ai-foundry/quickstarts/get-started-code).
-- Course outline: [`../../outline.pdf`](../../outline.pdf).

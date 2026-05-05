@@ -2,7 +2,7 @@
 
 Microsoft Press video course **Exam AI-901: Microsoft Azure AI Fundamentals** -- 16 lessons, 8 hours runtime, 30 minutes per lesson.
 
-Authoritative outline: [`../outline.pdf`](../outline.pdf). Verbatim Microsoft Learn skills measured (when synced) live in [`../docs/ai901-exam-objectives.md`](../docs/ai901-exam-objectives.md).
+Verbatim Microsoft Learn skills measured live in [`../docs/ai901-objective-domain.md`](../docs/ai901-objective-domain.md).
 
 ## Domain map
 

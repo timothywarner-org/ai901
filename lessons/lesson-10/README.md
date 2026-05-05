@@ -16,4 +16,3 @@ Minimal Python chat client: `DefaultAzureCredential` + Foundry SDK + the model d
 
 - Microsoft Learn: [Microsoft Foundry SDK quickstart](https://learn.microsoft.com/azure/ai-foundry/quickstarts/get-started-code).
 - Microsoft Learn: [Authenticate with Microsoft Entra ID](https://learn.microsoft.com/azure/developer/python/sdk/authentication-overview).
-- Course outline: [`../../outline.pdf`](../../outline.pdf).

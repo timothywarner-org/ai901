@@ -15,4 +15,3 @@ Walk the Foundry portal evaluation, tracing, and reporting surfaces that support
 ## Resources
 
 - Microsoft Learn: [Responsible AI standard](https://www.microsoft.com/ai/responsible-ai).
-- Course outline: [`../../outline.pdf`](../../outline.pdf).

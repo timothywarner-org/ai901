@@ -15,4 +15,3 @@ Foundry playground tour: multimodal chat with image input and image generation f
 ## Resources
 
 - Microsoft Learn: [Azure AI Vision overview](https://learn.microsoft.com/azure/ai-services/computer-vision/overview).
-- Course outline: [`../../outline.pdf`](../../outline.pdf).

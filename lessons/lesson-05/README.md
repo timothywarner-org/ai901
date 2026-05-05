@@ -16,4 +16,3 @@ In-portal demo of Azure AI Language and Azure AI Speech surfaces in Foundry Tool
 
 - Microsoft Learn: [Azure AI Language overview](https://learn.microsoft.com/azure/ai-services/language-service/overview).
 - Microsoft Learn: [Azure AI Speech overview](https://learn.microsoft.com/azure/ai-services/speech-service/overview).
-- Course outline: [`../../outline.pdf`](../../outline.pdf).

@@ -15,4 +15,3 @@ In-portal tour of the Microsoft Foundry workload landing pages. No code.
 ## Resources
 
 - Microsoft Learn: [AI-900 / AI-901 Fundamentals study path](https://learn.microsoft.com/training/courses/ai-900t00).
-- Course outline: [`../../outline.pdf`](../../outline.pdf).

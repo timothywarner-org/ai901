@@ -15,4 +15,3 @@ Tour Azure AI Content Safety in the Foundry portal: prompt shields, groundedness
 ## Resources
 
 - Microsoft Learn: [Microsoft Responsible AI principles](https://www.microsoft.com/ai/responsible-ai).
-- Course outline: [`../../outline.pdf`](../../outline.pdf).

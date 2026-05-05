@@ -15,4 +15,3 @@ Python app that performs both directions: send an image to a multimodal Foundry 
 ## Resources
 
 - Microsoft Learn: [Multimodal models in Microsoft Foundry](https://learn.microsoft.com/azure/ai-foundry/concepts/foundry-models-overview).
-- Course outline: [`../../outline.pdf`](../../outline.pdf).

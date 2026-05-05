@@ -15,4 +15,3 @@ Tour Azure Content Understanding in Foundry Tools and compare with Azure AI Docu
 ## Resources
 
 - Microsoft Learn: [Azure Content Understanding overview](https://learn.microsoft.com/azure/ai-services/content-understanding/overview).
-- Course outline: [`../../outline.pdf`](../../outline.pdf).

@@ -15,4 +15,3 @@ Python conversational app: microphone -> Azure Speech STT -> Foundry chat comple
 ## Resources
 
 - Microsoft Learn: [Azure AI Speech SDK quickstart](https://learn.microsoft.com/azure/ai-services/speech-service/get-started-speech-to-text).
-- Course outline: [`../../outline.pdf`](../../outline.pdf).

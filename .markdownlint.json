@@ -27,6 +27,15 @@
     "style": "one_or_ordered"
   },
   "MD033": {
-    "allowed_elements": ["br", "sub", "sup", "details", "summary", "p", "img", "a"]
+    "allowed_elements": [
+      "br",
+      "sub",
+      "sup",
+      "details",
+      "summary",
+      "p",
+      "img",
+      "a"
+    ]
   }
 }

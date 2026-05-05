@@ -15,4 +15,3 @@ Build a Foundry agent end to end in the portal: role, instructions, one tool, on
 ## Resources
 
 - Microsoft Learn: [Microsoft Foundry Agent Service](https://learn.microsoft.com/azure/ai-foundry/agents/overview).
-- Course outline: [`../../outline.pdf`](../../outline.pdf).

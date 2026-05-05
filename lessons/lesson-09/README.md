@@ -15,4 +15,3 @@ Foundry playground: progressive prompt refinement -- bare user prompt, then add 
 ## Resources
 
 - Microsoft Learn: [Prompt engineering techniques](https://learn.microsoft.com/azure/ai-services/openai/concepts/prompt-engineering).
-- Course outline: [`../../outline.pdf`](../../outline.pdf).

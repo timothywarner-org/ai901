@@ -20,9 +20,8 @@ A focused, exam-aligned video crash course that takes you from "what is generati
 
 This repo is the source of truth for the recorded course:
 
-1. [`outline.pdf`](outline.pdf) -- the locked Microsoft Press deliverable spec (16 lessons with their exam objective IDs).
-2. [`lessons/`](lessons/) -- one folder per lesson with a README, on-camera demo code under `demo/`, and supporting media under `assets/`.
-3. [`docs/`](docs/) -- cross-lesson reference material, exam objective sync, and study resources.
+1. [`lessons/`](lessons/) -- one folder per lesson with a README, on-camera demo code under `demo/`, and supporting media under `assets/`.
+2. [`docs/`](docs/) -- cross-lesson reference material, exam objective sync, and study resources.
 
 ## Course at a glance
 
@@ -34,6 +33,10 @@ The exam blueprint dated **April 15, 2026** (current at time of writing) defines
 | 2 -- Implement AI solutions by using Microsoft Foundry | 55 -- 60% | Generative apps and agents, text and speech apps, computer vision and image-generation apps, information extraction with Azure Content Understanding. |
 
 Authoritative source: [Microsoft Learn -- AI-901 study guide](https://learn.microsoft.com/credentials/certifications/resources/study-guides/ai-901). The official exam page lives at [learn.microsoft.com/credentials/certifications/exams/ai-901](https://learn.microsoft.com/credentials/certifications/exams/ai-901/). Pass score is **700**.
+
+Exam reference: a verbatim local mirror of the skills-measured outline lives at
+[`docs/ai901-objective-domain.md`](docs/ai901-objective-domain.md). The Cert Buddy agent uses this file as its
+canonical objective list when generating practice items, labs, and study plans.
 
 ## Lesson plan
 
@@ -58,7 +61,7 @@ Every lesson is 30 minutes. Lessons 01 -- 07 are concept lessons that map to Dom
 | 15 | [Build a Computer Vision and Image-Generation Application](lessons/lesson-15/README.md) | 2 | Multimodal vision input; image-generation outputs |
 | 16 | [Extract Information from Documents, Images, Audio, and Video with Content Understanding](lessons/lesson-16/README.md) | 2 | Azure Content Understanding across four modalities |
 
-Full per-lesson learning objectives live in each `lessons/lesson-NN/README.md`. The locked spec is [`outline.pdf`](outline.pdf).
+Full per-lesson learning objectives live in each `lessons/lesson-NN/README.md`.
 
 ## Audience
 
@@ -81,12 +84,30 @@ A single Foundry project is reused across all build lessons. Sample inputs live 
 
 ```text
 ai901/
-├── outline.pdf                  # Locked Microsoft Press deliverable spec
 ├── README.md                    # This file
 ├── CLAUDE.md                    # Guidance for Claude Code agents
 ├── LICENSE                      # MIT
 ├── .markdownlint.json           # Markdown lint config
 ├── images/cover.png             # Course cover (800x450, optimized)
+│
+├── .github/                     # AI-901 Cert Buddy: agent + skills + prompts
+│   ├── agents/
+│   │   └── ai901-cert-buddy-agent.agent.md
+│   ├── skills/
+│   │   ├── ai901-item-creator/SKILL.md
+│   │   ├── ai901-lab-creator/SKILL.md
+│   │   └── ai901-study-planner/SKILL.md
+│   ├── prompts/
+│   │   ├── ai901-quiz.prompt.md
+│   │   ├── ai901-lab.prompt.md
+│   │   └── ai901-plan.prompt.md
+│   ├── copilot-instructions.md
+│   └── workflows/validate.yml
+│
+├── .vscode/                     # MCP server + recommended extensions
+│   ├── mcp.json
+│   └── extensions.json
+│
 ├── lessons/                     # 16 lesson folders
 │   ├── README.md                # Lessons index + domain map
 │   └── lesson-NN/
@@ -94,6 +115,7 @@ ai901/
 │       ├── demo/                # On-camera code (build lessons) or walkthrough notes (concept lessons)
 │       └── assets/              # Slides, screenshots, sample inputs
 ├── docs/                        # Cross-lesson reference material
+│   └── ai901-objective-domain.md  # Verbatim Microsoft Learn skills-measured sync
 ├── src/                         # Cross-lesson shared code (only when reused)
 ├── scripts/                     # Repo-level helpers
 └── tests/                       # Cross-lesson tests
@@ -108,9 +130,8 @@ ai901/
    cd ai901
    ```
 
-2. **Read the outline:** [`outline.pdf`](outline.pdf) -- the 16-lesson spec.
-3. **Read the lessons index:** [`lessons/README.md`](lessons/README.md).
-4. **For build lessons,** open the lesson folder, follow its README, and run the code in `demo/`:
+2. **Read the lessons index:** [`lessons/README.md`](lessons/README.md).
+3. **For build lessons,** open the lesson folder, follow its README, and run the code in `demo/`:
 
    ```powershell
    cd lessons/lesson-10/demo
@@ -120,6 +141,10 @@ ai901/
    az login
    python main.py
    ```
+
+4. **Use the AI-901 Cert Buddy:** open the repo in VS Code with `code .`. The Microsoft Learn MCP server defined
+   in [`.vscode/mcp.json`](.vscode/mcp.json) auto-loads, and the agent becomes available in GitHub Copilot Chat as
+   `@ai901-cert-buddy-agent`. See the [AI-901 Cert Buddy](#ai-901-cert-buddy) section below.
 
 ## Companion Microsoft Learn resources
 
@@ -134,6 +159,86 @@ The AI-901 study guide names these as primary references. They are useful as sec
 - [Microsoft Responsible AI](https://www.microsoft.com/ai/responsible-ai)
 
 For broader documentation, ask a question on [Microsoft Q&A](https://learn.microsoft.com/answers/) or visit the [AI and Machine Learning community hub](https://techcommunity.microsoft.com/t5/artificial-intelligence-and/ct-p/AI).
+
+## AI-901 Cert Buddy
+
+An AI-powered study companion for the **Microsoft AI-901: Microsoft Azure AI Fundamentals** certification, built
+entirely on GitHub Copilot agents. The buddy lives in [`.github/`](.github/) as agent definitions, skill specs, prompt
+templates, and an MCP server configuration that turns GitHub Copilot Chat into an interactive exam coach for this
+workspace.
+
+The agent generates **exam-realistic practice questions** with two-phase interactive evaluation, **short hands-on labs**
+(15-25 minutes) across Microsoft Foundry portal builds, Foundry SDK client apps, Azure AI services, and Azure Content
+Understanding, and **personalized study plans** based on your self-assessed confidence across the two AI-901 domains.
+All content is original and grounded in Microsoft Learn via MCP.
+
+### Cert Buddy prerequisites
+
+| Requirement | Purpose |
+| --- | --- |
+| **VS Code** | IDE with Copilot Chat support |
+| **GitHub Copilot Chat extension** | Runs the agent and skills inside VS Code |
+| **Azure subscription** (optional) | Only required for build-lesson labs that create Microsoft Foundry, Azure AI services, or Azure Content Understanding resources |
+
+No API keys, Node.js, or Python are required for the Cert Buddy itself. The Microsoft Learn MCP server is a free hosted
+service with no sign-up.
+
+### Cert Buddy quick start
+
+1. Open the folder in VS Code:
+
+   ```bash
+   code ai901
+   ```
+
+2. The Microsoft Learn MCP server is defined in [`.vscode/mcp.json`](.vscode/mcp.json) and auto-configures when the
+   workspace loads.
+
+3. Open **GitHub Copilot Chat** and invoke the agent:
+
+   ```text
+   @ai901-cert-buddy-agent Quiz me on Microsoft Foundry agent deployment
+   ```
+
+   Or use the slash commands. Type `/` in Copilot Chat:
+
+   ```text
+   /ai901-quiz
+   /ai901-lab
+   /ai901-plan
+   ```
+
+### Cert Buddy skills
+
+| Skill | File | What it does |
+| --- | --- | --- |
+| `ai901-item-creator` | [`.github/skills/ai901-item-creator/SKILL.md`](.github/skills/ai901-item-creator/SKILL.md) | Exam-realistic AI-901 practice questions with two-phase interactive delivery (question -> wait -> evaluate). |
+| `ai901-lab-creator` | [`.github/skills/ai901-lab-creator/SKILL.md`](.github/skills/ai901-lab-creator/SKILL.md) | 15-25 minute self-validating labs across Microsoft Foundry portal, Foundry SDK for Python, Azure AI services, and Azure Content Understanding. |
+| `ai901-study-planner` | [`.github/skills/ai901-study-planner/SKILL.md`](.github/skills/ai901-study-planner/SKILL.md) | Personalized study plans based on confidence across the two AI-901 domains, with real Microsoft Learn module links and lesson cross-references. |
+
+### Cert Buddy MCP server
+
+| Server ID | Technology | Purpose |
+| --- | --- | --- |
+| `ai901buddy-mslearn` | `https://learn.microsoft.com/api/mcp` (HTTP) | Free Microsoft Learn MCP server -- no API keys, no sign-up. Provides `microsoft_docs_search`, `microsoft_docs_fetch`, and `microsoft_code_sample_search`. Grounds all Cert Buddy content in official Microsoft documentation. |
+
+### Cert Buddy key rules
+
+- **Grounded in Microsoft Learn.** Every question and lab is grounded in official Learn docs via MCP before any other
+  source.
+- **Current terminology only.** Legacy names like *Azure AI Studio*, *Azure AI Foundry*, *Azure AD*, *Azure Cognitive
+  Services*, *Form Recognizer*, and *LUIS* are silently replaced with *Microsoft Foundry*, *Microsoft Entra ID*, *Azure
+  AI services*, *Azure AI Document Intelligence*, and *Azure AI Language CLU*. See the full rename table in
+  [`.github/copilot-instructions.md`](.github/copilot-instructions.md).
+- **Original content only.** The agent never recreates, paraphrases, or references real exam questions, braindumps, or
+  leaked content.
+- **No contractions. No trick wording. Distractors must be real.**
+- **Answer randomization.** The correct answer position is distributed across A, B, C, and D.
+- **Company randomization.** Scenarios draw from the WWL-approved Fictitious Names List embedded directly in the agent
+  and skill files -- always the entire company name, never a shortened form.
+- **Labs include cleanup.** Every lab ends with exact rollback or deletion steps so that no Azure resources linger.
+- **Microsoft style.** Items follow the Microsoft Worldwide Learning Exam Writing Style Guide; prose follows the
+  Microsoft Writing Style Guide. Both rule sets are inlined into the agent and skill files.
 
 ## Authoring conventions
 

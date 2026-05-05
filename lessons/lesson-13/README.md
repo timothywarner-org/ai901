@@ -15,4 +15,3 @@ Python text-analysis app -- entities, key phrases, sentiment, summarization on a
 ## Resources
 
 - Microsoft Learn: [Azure AI Language quickstart](https://learn.microsoft.com/azure/ai-services/language-service/quickstart).
-- Course outline: [`../../outline.pdf`](../../outline.pdf).

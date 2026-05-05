@@ -16,4 +16,3 @@ Build one Content Understanding analyzer schema, then run it across four input m
 ## Resources
 
 - Microsoft Learn: [Azure Content Understanding overview](https://learn.microsoft.com/azure/ai-services/content-understanding/overview).
-- Course outline: [`../../outline.pdf`](../../outline.pdf).

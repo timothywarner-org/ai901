@@ -15,4 +15,3 @@ Python client that calls the agent built in lesson 11 -- threads, multi-turn sta
 ## Resources
 
 - Microsoft Learn: [Foundry Agents -- client SDK](https://learn.microsoft.com/azure/ai-foundry/agents/quickstart).
-- Course outline: [`../../outline.pdf`](../../outline.pdf).
