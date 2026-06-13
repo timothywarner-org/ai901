@@ -1,0 +1,62 @@
+============================================================================
+Lesson 16 -- Test Strings (Content Understanding multimodal extractor)
+Course: Exam AI-901 -- Microsoft Azure AI Fundamentals (Video)
+============================================================================
+Copy and paste these. Run every command from the demo/ folder so the
+./samples/... relative paths resolve.
+
+The lesson-16-extract.py router reads the file's MIME type and picks
+the prebuilt analyzer for you -- the analyzer IDs below are listed so you
+know what the router is routing to.
+
+The media files are staged in demo/samples/.
+
+----------------------------------------------------------------------------
+Document -- Fabrikam invoice (PDF)
+  Demo analyzer:  prebuilt-receipt   (structured fields + per-field confidence)
+  Exam answer:    prebuilt-invoice   (invoices map to prebuilt-invoice on the exam;
+                  the demo runs prebuilt-receipt because prebuilt-invoice is down
+                  server-side as of mid-2026 -- both share one field-extraction
+                  engine and return identical field+confidence output)
+----------------------------------------------------------------------------
+python lesson-16-extract.py ./samples/fabrikam-invoice.pdf
+
+----------------------------------------------------------------------------
+Image -- Wingtip Toys shelf photo
+  Analyzer: prebuilt-imageSearch   (one-paragraph description + Markdown)
+----------------------------------------------------------------------------
+python lesson-16-extract.py ./samples/wingtip-shelf.jpg
+
+----------------------------------------------------------------------------
+Audio -- Northwind Traders support call
+  Analyzer: prebuilt-audioSearch   (transcript + diarization + summary)
+----------------------------------------------------------------------------
+python lesson-16-extract.py ./samples/northwind-support-call.wav
+
+----------------------------------------------------------------------------
+Video -- Adventure Works promo clip
+  Analyzer: prebuilt-video   (transcript + diarization + keyframes + shot boundaries)
+            (prebuilt-videoSearch adds a summary but is down server-side as of
+             mid-2026; base prebuilt-video carries the exam-relevant signals)
+----------------------------------------------------------------------------
+python lesson-16-extract.py ./samples/adventureworks-promo.mp4
+
+----------------------------------------------------------------------------
+Confidence floor (tune this in the script to explore the gate behavior)
+----------------------------------------------------------------------------
+CONFIDENCE_FLOOR = 0.80
+
+----------------------------------------------------------------------------
+Pre-flight one-liners (run in terminal before starting)
+----------------------------------------------------------------------------
+az account show --query name -o tsv
+python --version
+
+============================================================================
+Sample file -> analyzer map (the router's logic)
+============================================================================
+  ./samples/fabrikam-invoice.pdf         -> prebuilt-receipt      (application/pdf)
+  ./samples/wingtip-shelf.jpg            -> prebuilt-imageSearch  (image/jpeg)
+  ./samples/northwind-support-call.wav   -> prebuilt-audioSearch  (audio/wav)
+  ./samples/adventureworks-promo.mp4     -> prebuilt-video        (video/mp4)
+============================================================================

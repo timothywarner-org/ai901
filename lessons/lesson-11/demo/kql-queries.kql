@@ -1,0 +1,63 @@
+// =============================================================================
+// Lesson 11 -- Log Analytics (KQL) queries for Foundry Agent Service tracing
+// =============================================================================
+// PREREQUISITE: the Foundry project must be CONNECTED to Application Insights.
+//   In the Foundry portal: Agents -> Traces -> Connect -> pick your App Insights
+//   resource. Until you connect it, these tables are empty.
+//
+//   Foundry exports OpenTelemetry "gen_ai" spans, which land in the AppDependencies
+//   table (workspace-based Application Insights schema). Span and property names
+//   follow the OpenTelemetry GenAI semantic conventions.
+//
+// TIP: If a property below comes back null, run query 0 first to see the real
+// property names your SDK version emitted, then adjust the Properties["..."]
+// keys to match.
+// =============================================================================
+
+
+// 0) DISCOVERY -- see what the agent actually emitted (run this first)
+AppDependencies
+| where TimeGenerated > ago(1h)
+| project TimeGenerated, Name, DependencyType, Target, DurationMs, Success, Properties
+| order by TimeGenerated desc
+| take 25
+
+
+// 1) RECENT AGENT ACTIVITY -- every gen_ai span in the last hour
+AppDependencies
+| where TimeGenerated > ago(1h)
+| where Properties has "gen_ai" or Name has_any ("chat", "mcp", "tool", "agent")
+| project TimeGenerated, Operation = Name, DurationMs, Success,
+          Model = tostring(Properties["gen_ai.request.model"])
+| order by TimeGenerated desc
+
+
+// 2) TOKEN USAGE OVER TIME -- input vs output tokens, 5-minute buckets
+AppDependencies
+| where TimeGenerated > ago(24h)
+| extend InTok  = toint(Properties["gen_ai.usage.input_tokens"]),
+         OutTok = toint(Properties["gen_ai.usage.output_tokens"])
+| where isnotnull(InTok) or isnotnull(OutTok)
+| summarize InputTokens = sum(InTok), OutputTokens = sum(OutTok)
+        by bin(TimeGenerated, 5m)
+| render columnchart
+
+
+// 3) TOOL-CALL LATENCY AND COUNT -- which operations ran, how often, how slow
+//    (this is where you will see the Microsoft Learn MCP tool calls surface)
+AppDependencies
+| where TimeGenerated > ago(24h)
+| summarize Calls = count(),
+            p50_ms = round(percentile(DurationMs, 50), 0),
+            p95_ms = round(percentile(DurationMs, 95), 0)
+        by Operation = Name
+| order by Calls desc
+
+
+// 4) ERRORS AND FAILED SPANS -- anything that did not succeed
+AppDependencies
+| where TimeGenerated > ago(24h)
+| where Success == false
+| project TimeGenerated, Operation = Name, DurationMs,
+          Result = tostring(Properties["error.type"]), Properties
+| order by TimeGenerated desc

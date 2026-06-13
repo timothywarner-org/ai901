@@ -16,11 +16,11 @@
 
 **Microsoft Press Video Course** | 16 lessons | 8 hours runtime | 30 minutes per lesson
 
-A focused, exam-aligned video crash course that takes you from "what is generative AI" to "I just shipped a Foundry agent" in a single arc. Every lesson maps to a published AI-901 skill, and the build lessons run on a real Microsoft Foundry project with keyless Microsoft Entra authentication.
+A focused, exam-aligned video crash course that takes you from "what is generative AI" to "I just shipped a Foundry agent" in a single arc. Every lesson maps to a published AI-901 skill, and the build lessons run on a real Microsoft Foundry project, most using keyless Microsoft Entra authentication.
 
 This repo is the source of truth for the recorded course:
 
-1. [`lessons/`](lessons/) -- one folder per lesson with a README, on-camera demo code under `demo/`, and supporting media under `assets/`.
+1. [`lessons/`](lessons/) -- one folder per lesson with a README, runnable demo code under `demo/`, and supporting media under `assets/`.
 2. [`docs/`](docs/) -- cross-lesson reference material, exam objective sync, and study resources.
 
 ## Course at a glance
@@ -69,16 +69,16 @@ From the AI-901 audience profile: candidates are at the **beginning of an AI-sol
 
 ## Prerequisites for the build lessons
 
-Concept lessons (01 -- 07) require no setup. Build lessons (08 -- 16) need:
+Concept lessons 01 -- 03 require no setup. Concept lessons 04 -- 07 ship an optional SDK bookend sample and a one-command deploy script, so they share the build-lesson prerequisites below when you choose to run the code. Build lessons (08 -- 16) need:
 
 - An **Azure subscription** with permission to create a Microsoft Foundry project.
 - A **Microsoft Foundry project** with one chat-capable model deployed (a small, low-cost model is fine for the entire course).
 - **Python 3.12** locally.
-- The **Azure CLI** with `az login` completed -- the demos use `DefaultAzureCredential` and Microsoft Entra-based keyless authentication. You will not check in API keys.
+- The **Azure CLI** with `az login` completed. Most demos use `DefaultAzureCredential` (Microsoft Entra keyless authentication); a few early lessons read a key from `.env`. Either way, you will not check in secrets -- only `.env.example` is tracked.
 - For lesson 14 specifically, an **Azure Speech** resource attached to your Foundry project.
 - For lesson 16 specifically, **Azure Content Understanding** enabled in your Foundry project.
 
-A single Foundry project is reused across all build lessons. Sample inputs live in each lesson's `assets/` folder so you do not need to source your own.
+A single Foundry project is reused across all build lessons. Runnable sample inputs live in each lesson's `demo/samples/` folder (for example, Lesson 16's invoice, image, audio, and video files) so you do not need to source your own.
 
 ## Repository structure
 
@@ -112,7 +112,7 @@ ai901/
 │   ├── README.md                # Lessons index + domain map
 │   └── lesson-NN/
 │       ├── README.md            # Title, runtime, exam objectives, learning objectives, demo, resources
-│       ├── demo/                # On-camera code (build lessons) or walkthrough notes (concept lessons)
+│       ├── demo/                # Runnable scripts, requirements.txt, .env.example, deploy script, optional webapp/ and samples/
 │       └── assets/              # Slides, screenshots, sample inputs
 ├── docs/                        # Cross-lesson reference material
 │   └── ai901-objective-domain.md  # Verbatim Microsoft Learn skills-measured sync
@@ -131,16 +131,21 @@ ai901/
    ```
 
 2. **Read the lessons index:** [`lessons/README.md`](lessons/README.md).
-3. **For build lessons,** open the lesson folder, follow its README, and run the code in `demo/`:
+3. **For build lessons,** open the lesson folder, follow its `demo/README.md`, and run the code in `demo/`:
 
    ```powershell
    cd lessons/lesson-10/demo
+   .\Deploy-Lesson10-Infrastructure.ps1       # provision the Azure resources (idempotent)
    python -m venv .venv
    .venv\Scripts\Activate.ps1
    pip install -r requirements.txt
-   az login
-   python main.py
+   copy .env.example .env                      # then paste YOUR endpoint values
+   az login                                    # keyless lessons authenticate as your az-login identity
+   python lesson-10-foundry-chat-client.py
    ```
+
+   Each lesson's `demo/README.md` lists the exact script name, the variables to set in `.env`, and a
+   "Practice on your own" section. Never commit your `.env` -- only `.env.example` is tracked.
 
 4. **Use the AI-901 Cert Buddy:** open the repo in VS Code with `code .`. The Microsoft Learn MCP server defined
    in [`.vscode/mcp.json`](.vscode/mcp.json) auto-loads, and the agent becomes available in GitHub Copilot Chat as

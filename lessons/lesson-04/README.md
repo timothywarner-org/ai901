@@ -10,7 +10,7 @@
 
 ## Demo
 
-Walk the Foundry portal evaluation, tracing, and reporting surfaces that support transparency and accountability artifacts.
+Walk the Foundry portal evaluation, tracing, and reporting surfaces that support transparency and accountability artifacts. A one-command provisioning script for the portal walkthrough lives in [`demo/`](./demo/).
 
 ## Resources
 

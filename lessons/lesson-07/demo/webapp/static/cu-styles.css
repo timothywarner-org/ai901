@@ -1,0 +1,231 @@
+/*
+ * AI-901 Content Understanding Lab -- styles
+ * Layout: controls left, JSON envelope right. Deliberately neutral so the
+ * JSON is the focus.
+ *
+ * Accessibility: status and error states are signaled by TEXT + WEIGHT + a
+ * left border, never by color alone. The status classes change the LABEL and
+ * the border position/weight, so the state is legible in grayscale.
+ */
+
+:root {
+  --ink: #1a1a1a;
+  --muted: #5a5a5a;
+  --line: #d0d0d0;
+  --bg: #fafafa;
+  --panel: #ffffff;
+  --accent: #0b5fff;
+  --accent-ink: #ffffff;
+  --code-bg: #eef0f3;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: -apple-system, "Segoe UI", Roboto, sans-serif;
+  color: var(--ink);
+  background: var(--bg);
+  font-size: 15px;
+  line-height: 1.45;
+}
+
+code {
+  font-family: "Cascadia Code", Consolas, monospace;
+  font-size: 0.9em;
+  background: var(--code-bg);
+  padding: 1px 5px;
+  border-radius: 3px;
+}
+
+/* Header ----------------------------------------------------------------- */
+.app-header {
+  padding: 16px 24px;
+  border-bottom: 1px solid var(--line);
+  background: var(--panel);
+}
+.app-header h1 { margin: 0 0 2px; font-size: 20px; }
+.subtitle { margin: 0; color: var(--muted); font-size: 13px; }
+
+/* Tab bar ---------------------------------------------------------------- */
+.tabs {
+  display: flex;
+  gap: 4px;
+  padding: 12px 24px 0;
+  background: var(--panel);
+  border-bottom: 1px solid var(--line);
+}
+.tab {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+  padding: 8px 16px;
+  border: 1px solid var(--line);
+  border-bottom: none;
+  border-radius: 8px 8px 0 0;
+  background: var(--bg);
+  color: var(--muted);
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+}
+/* Active tab is signaled by weight + a thick top border + raised background,
+   not by color alone. */
+.tab.is-active {
+  background: var(--panel);
+  color: var(--ink);
+  border-top: 3px solid var(--accent);
+  padding-top: 6px;
+}
+.tab-analyzer {
+  font-family: "Cascadia Code", Consolas, monospace;
+  font-size: 11px;
+  font-weight: 400;
+  color: var(--muted);
+}
+
+/* Two-column layout ------------------------------------------------------ */
+.layout {
+  display: grid;
+  grid-template-columns: 360px 1fr;
+  gap: 16px;
+  padding: 16px 24px;
+  align-items: start;
+}
+
+.panel {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 16px;
+}
+.panel h2 { margin: 0 0 4px; font-size: 16px; }
+
+.analyzer-line { margin: 0 0 12px; color: var(--muted); font-size: 13px; }
+
+/* Instructional copy -- the cert-prep teaching block. Two stacked lines:
+   "What it does" (plain API explanation) and "On the AI-901 exam" (the exam
+   angle). The exam line gets a heavier left border so it reads as the callout,
+   distinguished by border weight + the bold label, never by color alone. */
+.modality-info {
+  margin: 0 0 16px;
+  font-size: 13px;
+  line-height: 1.5;
+}
+.modality-info p { margin: 0 0 8px; }
+.modality-info .info-api {
+  padding: 8px 10px;
+  border-left: 3px solid var(--line);
+  background: var(--bg);
+}
+.modality-info .info-exam {
+  padding: 8px 10px;
+  /* Double border-style (not just a wider rail) so the exam callout differs
+     from the api line by SHAPE, legible in grayscale. */
+  border-left: 6px double var(--accent);
+  background: var(--bg);
+}
+.modality-info strong { display: block; margin-bottom: 2px; }
+
+/* Controls --------------------------------------------------------------- */
+.field-label {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+.text-input {
+  width: 100%;
+  padding: 8px 10px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  font-family: "Cascadia Code", Consolas, monospace;
+  font-size: 12px;
+}
+.hint { margin: 6px 0 16px; color: var(--muted); font-size: 12px; }
+
+/* Button row: primary Analyze + secondary Preview, side by side. */
+.btn-row { display: flex; gap: 8px; }
+
+.primary-btn {
+  flex: 1 1 auto;
+  padding: 10px 16px;
+  border: none;
+  border-radius: 6px;
+  background: var(--accent);
+  color: var(--accent-ink);
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.primary-btn:disabled { opacity: 0.55; cursor: progress; }
+
+/* Secondary action -- outlined, not filled, so the primary stays the obvious
+   default. Distinguished by border + weight, not color. */
+.secondary-btn {
+  flex: 0 0 auto;
+  padding: 10px 16px;
+  border: 1px solid var(--accent);
+  border-radius: 6px;
+  background: var(--panel);
+  color: var(--ink);
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.secondary-btn:hover { background: var(--bg); }
+
+/* Status line -- state by label text + left border weight, not color. */
+.status {
+  margin-top: 16px;
+  padding: 8px 12px;
+  border-left: 4px solid var(--line);
+  background: var(--bg);
+  font-size: 13px;
+  font-weight: 600;
+}
+.status-idle    { border-left-color: var(--line);  color: var(--muted); font-weight: 400; }
+.status-working { border-left-width: 6px; border-left-color: var(--accent); color: var(--ink); }
+.status-ok      { border-left-width: 6px; border-left-color: #1a1a1a; color: var(--ink); }
+.status-error   { border-left-width: 6px; border-left-style: double; border-left-color: #1a1a1a; color: var(--ink); }
+
+/* Results ---------------------------------------------------------------- */
+.results-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+}
+.result-meta {
+  font-family: "Cascadia Code", Consolas, monospace;
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.highlights {
+  margin: 12px 0;
+  padding: 10px 12px;
+  border: 1px solid var(--line);
+  border-left: 4px solid var(--accent);
+  border-radius: 6px;
+  background: var(--bg);
+  font-size: 13px;
+}
+.highlights dl { margin: 0; display: grid; grid-template-columns: auto 1fr; gap: 2px 12px; }
+.highlights dt { font-weight: 600; color: var(--muted); }
+.highlights dd { margin: 0; }
+
+.json-pane {
+  margin: 12px 0 0;
+  padding: 14px;
+  max-height: 62vh;
+  overflow: auto;
+  background: #0e1116;
+  color: #e6edf3;
+  border-radius: 8px;
+  font-family: "Cascadia Code", Consolas, monospace;
+  font-size: 12.5px;
+  line-height: 1.5;
+  white-space: pre;
+}
+.json-placeholder { color: #8b949e; }

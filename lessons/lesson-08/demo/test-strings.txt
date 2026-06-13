@@ -1,0 +1,73 @@
+============================================================================
+ Lesson 8 -- Test strings (copy/paste into the portal; do not retype)
+ Tour Microsoft Foundry and Deploy Your First Model
+============================================================================
+
+----------------------------------------------------------------------------
+ Wingtip Toys copywriter system message  (Playground System message box)
+----------------------------------------------------------------------------
+You are a marketing copywriter for Wingtip Toys. Write in a warm, family-friendly voice. Keep responses under two sentences unless the user explicitly asks for more.
+
+
+----------------------------------------------------------------------------
+ Playground user prompts  (one per demo moment, in order)
+----------------------------------------------------------------------------
+Write a one-line tagline for a new wooden train set.
+
+Now give me a second tagline with more energy.
+
+Now write three taglines that all mention "handcrafted in Maine".
+
+
+============================================================================
+ POCKET CARDS
+============================================================================
+
+----------------------------------------------------------------------------
+ Shared-scope vs project-scope
+   Exam says "hub"; New Foundry says "resource" / Management center. Same concept.
+----------------------------------------------------------------------------
+Shared (resource / Management center) : Connections, Networking, Identity
+Shared (resource / Management center) : Model catalog (org-wide governance)
+Shared (resource / Management center) : Storage, Search, Content Safety
+Project                               : Models + endpoints (deployments)
+Project                               : Data + indexes (datasets, vector indexes)
+Project                               : Agents, Playgrounds, Evaluations
+Project                               : Tracing (per-run telemetry)
+
+Rule of thumb: shared scope for shared resources, project for the actual work.
+
+
+----------------------------------------------------------------------------
+ Deployment-type decision tree
+----------------------------------------------------------------------------
+Predictable high-volume workload, can pre-reserve?    -> Provisioned-Managed (PTU)
+EU or US data residency required?                     -> Data Zone Standard
+Highest possible throughput ceiling, multi-region OK? -> Global Standard
+Low volume or prototype, lowest cost?                 -> Standard
+
+Walk the questions in order. The first YES is your answer.
+
+
+----------------------------------------------------------------------------
+ Temperature vs. max tokens
+----------------------------------------------------------------------------
+Style / creativity / randomness   -> temperature (0.0 to 2.0)
+Response length / cost ceiling    -> max_tokens (integer)
+
+The exam swaps these in distractors. Read the keyword and pick.
+
+
+----------------------------------------------------------------------------
+ Deployment-name vs. model-name   (SDK bookend -- the most-tested Python detail)
+----------------------------------------------------------------------------
+client.chat.completions.create(model="gpt-4o-mini", ...)
+  model=          -> the DEPLOYMENT name (what you typed in the wizard)
+  response.model  -> "gpt-4.1-mini-2025-04-14" (the underlying model that ran)
+
+Deployment name in. Model name out. They are NOT the same field.
+
+NOTE (why the names differ): the deployment name is what client code passes as model=;
+it is a label you choose in the wizard. The underlying model that actually runs is
+reported in response.model and may differ -- e.g., a deployment named gpt-4o-mini
+can be backed by gpt-4.1-mini (its deployable successor). They are not the same field.

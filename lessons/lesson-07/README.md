@@ -10,7 +10,7 @@
 
 ## Demo
 
-Tour Azure Content Understanding in Foundry Tools and compare with Azure AI Document Intelligence at a feature level.
+Tour Azure Content Understanding in Foundry Tools and compare with Azure AI Document Intelligence at a feature level. A runnable Azure Content Understanding sample, a local Flask web app, and a deploy script live in [`demo/`](./demo/).
 
 ## Resources
 

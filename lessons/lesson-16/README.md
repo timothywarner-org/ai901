@@ -11,7 +11,7 @@
 
 ## Demo
 
-Build one Content Understanding analyzer schema, then run it across four input modalities -- a PDF, an image, an audio clip, and a short video. Code lives in [`demo/`](./demo/); sample inputs in [`assets/`](./assets/).
+Build one Content Understanding analyzer schema, then run it across four input modalities -- a PDF, an image, an audio clip, and a short video. Code lives in [`demo/`](./demo/); sample inputs in [`demo/samples/`](./demo/samples/).
 
 ## Resources
 

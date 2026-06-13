@@ -1,0 +1,102 @@
+================================================================================
+LESSON 05 TEST STRINGS -- COPY / PASTE ONLY, DO NOT RETYPE
+================================================================================
+Keep this file open in its own window. Each block is bracketed by a single
+rule of equals signs so you can spot the next paste target at a glance.
+
+
+================================================================================
+[1] CONTOSO AIR CUSTOMER REVIEW
+    Used in: NER, Sentiment + Opinion Mining, Classic vs. Generative sentiment,
+             Python SDK (already baked into the script)
+================================================================================
+
+I flew Contoso Air from Seattle to Munich on March 12, 2026. The check-in agent at SEA was wonderful and the meal service in Premium Economy was the best I have had on any transatlantic flight this year. Unfortunately, the in-flight Wi-Fi was a disaster -- it disconnected three times during the flight and the support chat just kept apologizing. The Munich arrivals lounge was also filthy when I got off the plane. I will probably still fly Contoso Air next year, but they have to fix the Wi-Fi.
+
+
+================================================================================
+[2] NORTHWIND PRESS RELEASE
+    Used in: Key phrase extraction, Extractive + Abstractive summarization
+================================================================================
+
+Northwind Traders today announced the general availability of its next-generation cold-chain monitoring platform, ChillTrack 2026. The platform combines low-power IoT sensors with Microsoft Foundry-hosted AI models to predict refrigeration failures up to 48 hours before they occur. Early customers report a 37% reduction in spoilage and a 22% drop in unplanned maintenance calls during the six-month preview. ChillTrack 2026 is available worldwide starting today, with regional pricing and a 60-day free trial for existing Northwind logistics customers. The company will demonstrate the platform at the National Food Logistics Conference in Chicago next month, where Chief Technology Officer Sarah Lin will deliver a keynote on the future of edge-AI in cold-chain logistics. Industry analysts have positioned ChillTrack 2026 as the first commercially viable application of small language models in supply-chain operations, citing its sub-100-millisecond on-device inference and its native integration with Microsoft Fabric for downstream analytics.
+
+
+================================================================================
+[3] PII SAMPLE
+    Used in: PII detection (Language Studio)
+================================================================================
+
+Please contact our customer success rep Jamie Chen at jamie.chen@fabrikam.com or 425-555-0182 about invoice INV-7741. Her SSN on file is 555-12-3456 and the credit card we have ending in 4242 expires 11/2027.
+
+
+================================================================================
+[4] STT TEST SENTENCE
+    Used in: Real-time Speech-to-Text (word-level timestamps)
+    SPEAK into the mic -- do NOT paste. Read it exactly as written so the
+    Inverse Text Normalization (ITN) turns "seven two three five one" into
+    "72351" in the MaskedITN field.
+================================================================================
+
+My name is Tim Warner, my Wingtip Toys order number is W-Seven-Two-Three-Five-One.
+
+
+================================================================================
+[5] FABRIKAM BANK SSML
+    Used in: SSML editor in Speech Studio
+    Paste into the "Try SSML" / Audio Content Creation editor as-is.
+================================================================================
+
+<speak version="1.0" xmlns="http://www.w3.org/2001/10/synthesis" xml:lang="en-US">
+  <voice name="en-US-AvaMultilingualNeural">
+    Welcome to Fabrikam Bank. <break time="400ms"/>
+    Your account balance is
+    <prosody rate="-15%" pitch="+5%">
+      <emphasis level="strong">two thousand four hundred and fifty-two dollars</emphasis>
+    </prosody>.
+    <break time="600ms"/>
+    For account services, press one. For fraud, press two.
+  </voice>
+</speak>
+
+
+================================================================================
+[6] GENERATIVE-SENTIMENT SYSTEM MESSAGE
+    Used in: Foundry chat playground, deployment gpt-4-1-mini
+    Paste into the "System message" box on the LEFT pane, then click
+    "Apply changes" before pasting the Contoso Air review into the chat.
+================================================================================
+
+You are a sentiment classifier. Analyze the user's text and return ONLY a JSON object with two keys: "sentiment" (one of "positive", "negative", "neutral", "mixed") and "reasoning" (a one-sentence explanation). Return no other text.
+
+
+================================================================================
+[7] FOUR-WAY TRADEOFF MATRIX
+    Read aloud from a second monitor or notepad -- NOT pasted into any portal.
+    This is the close-out visual for the classic-vs-generative NLP comparison.
+================================================================================
+
+Dimension     | Classic Azure AI Language        | Generative gpt-4.1-mini
+--------------+----------------------------------+--------------------------------
+Cost          | Per call, predictable pennies    | Per token, scales with I/O
+Latency       | Single API call, ~100 ms         | Token-by-token, ~1+ second
+Auditability  | Versioned API + fixed schema     | Non-deterministic;
+              |                                  | prompt + model = contract
+Flexibility   | One named task per endpoint      | Any task you can describe
+
+Rule of thumb:  named technique  ->  prebuilt Azure AI Language
+                open-ended / multi-step / reasoning  ->  generative model
+                in doubt  ->  both, on different parts of the workload
+
+
+================================================================================
+[8] PYTHON SDK -- TERMINAL COMMAND
+    Run after opening VS Code integrated terminal in the demo/ folder.
+================================================================================
+
+python lesson-05-text-analytics.py
+
+
+================================================================================
+END OF TEST STRINGS
+================================================================================

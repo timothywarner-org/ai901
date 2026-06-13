@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AI-901 Content Understanding Lab</title>
+  <!--
+    Lesson 7 lab surface. Four modality tabs, one analyzer each, one JSON
+    envelope shape. The raw-JSON pane on the right IS the teaching surface --
+    the point of the lab is that every modality returns the same outer shape.
+  -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='cu-styles.css') }}" />
+</head>
+<body>
+  <header class="app-header">
+    <h1>Azure AI Content Understanding Lab</h1>
+    <p class="subtitle">
+      One analyzer per modality, one JSON envelope. GA api-version
+      <code>{{ api_version }}</code>. Local lab for AI-901 Lesson 7.
+    </p>
+  </header>
+
+  <!--
+    Tab bar. Each tab maps a modality to its prebuilt analyzer ID (rendered
+    from the server-side ANALYZER_MAP so the UI can never drift from the
+    client module's truth).
+  -->
+  <nav class="tabs" role="tablist" aria-label="Modality">
+    {% for modality, analyzer in analyzers.items() %}
+    <button
+      class="tab{% if loop.first %} is-active{% endif %}"
+      role="tab"
+      data-modality="{{ modality }}"
+      data-analyzer="{{ analyzer }}"
+      aria-selected="{{ 'true' if loop.first else 'false' }}"
+    >
+      {{ modality | capitalize }}
+      <span class="tab-analyzer">{{ analyzer }}</span>
+    </button>
+    {% endfor %}
+  </nav>
+
+  <main class="layout">
+    <!-- Controls (left) ------------------------------------------------- -->
+    <section class="panel controls" aria-label="Analyze controls">
+      <h2 id="active-modality-title">Document</h2>
+      <p class="analyzer-line">
+        Analyzer: <code id="active-analyzer">prebuilt-invoice</code>
+      </p>
+
+      <!--
+        Instructional copy, rendered per tab from the server-side MODALITY_INFO
+        (so it can never drift from the analyzer). The "What it does" line is
+        the plain-English API explanation; the "On the exam" line is the AI-901
+        framing -- this app is a cert-prep teaching surface, so both show.
+      -->
+      <div class="modality-info" aria-live="polite">
+        <p class="info-api"><strong>What it does:</strong>
+          <span id="info-api-text"></span></p>
+        <p class="info-exam"><strong>On the AI-901 exam:</strong>
+          <span id="info-exam-text"></span></p>
+      </div>
+
+      <label class="field-label" for="input-url">Input file URL</label>
+      <input
+        id="input-url"
+        type="url"
+        class="text-input"
+        spellcheck="false"
+        autocomplete="off"
+      />
+      <p class="hint">
+        Pre-filled with the official Microsoft sample for this modality.
+        Preview the asset to see the source, then click Analyze to run it.
+      </p>
+
+      <div class="btn-row">
+        <button id="analyze-btn" class="primary-btn" type="button">
+          Analyze
+        </button>
+        <!--
+          Opens the current input URL in a new browser tab so the source asset
+          (PDF / image / audio / video) can be inspected before analysis.
+          Pure client-side window.open -- no round-trip, no server route.
+        -->
+        <button id="preview-btn" class="secondary-btn" type="button">
+          Preview asset
+        </button>
+      </div>
+
+      <div
+        id="status-line"
+        class="status status-idle"
+        role="status"
+        aria-live="polite"
+      >
+        Ready.
+      </div>
+    </section>
+
+    <!-- Results (right) ------------------------------------------------- -->
+    <section class="panel results" aria-label="Result">
+      <div class="results-header">
+        <h2>Result envelope</h2>
+        <span id="result-meta" class="result-meta"></span>
+      </div>
+
+      <!-- Highlights: a human-readable headline above the raw JSON. -->
+      <div id="highlights" class="highlights" hidden></div>
+
+      <!-- The raw JSON pane -- the actual Lesson 7 teaching surface. -->
+      <pre id="json-pane" class="json-pane" tabindex="0" aria-label="Raw JSON response"><span class="json-placeholder">Run an analysis to see the structured JSON envelope.</span></pre>
+    </section>
+  </main>
+
+  <!--
+    Sample URLs handed to the client as a data island so the JS never
+    hardcodes them and they stay in lockstep with the server's SAMPLE_URLS.
+  -->
+  <script id="samples-data" type="application/json">{{ samples | tojson }}</script>
+  <!-- Per-modality instructional copy, kept in lockstep with the server. -->
+  <script id="modality-info-data" type="application/json">{{ modality_info | tojson }}</script>
+  <script src="{{ url_for('static', filename='cu-app.js') }}"></script>
+</body>
+</html>

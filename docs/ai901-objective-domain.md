@@ -8,7 +8,7 @@ Verbatim local mirror of the Microsoft Learn study guide for **Exam AI-901: Micr
 | --- | --- |
 | Source URL | [https://learn.microsoft.com/credentials/certifications/resources/study-guides/ai-901](https://learn.microsoft.com/credentials/certifications/resources/study-guides/ai-901) |
 | Microsoft "skills measured as of" date | **April 15, 2026** |
-| Local mirror revision date (last MCP sync) | **2026-05-05** |
+| Local mirror revision date (last MCP sync) | **2026-06-13** |
 | Synced by | Tim Warner via Microsoft Learn MCP server (`microsoft_docs_fetch`) |
 
 If Microsoft updates the upstream study guide, re-fetch the page and update the **skills measured as of** date and the **local mirror revision date** above in the same PR. Note any wording deltas in the [Change log](#change-log) at the bottom.
@@ -136,3 +136,4 @@ If a lesson README drifts from this file, fix the lesson, not this file.
 | Local mirror date | Microsoft "skills measured as of" date | Notes |
 | --- | --- | --- |
 | 2026-05-05 | 2026-04-15 | Initial mirror. Two-domain split (40 -- 45% / 55 -- 60%). Captured all 27 measurable skills across four Domain-1 sub-areas and four Domain-2 sub-areas. Heading wording note: study-guide "skills at a glance" uses *responsibilities* in the Domain 1 title, while the detailed section uses *capabilities*; this mirror uses *capabilities* throughout. |
+| 2026-06-13 | 2026-04-15 | Re-verified via microsoft_docs_fetch. Upstream study guide unchanged -- skills measured date, domain weights, and all 27 skill bullets are identical to the 2026-05-05 mirror. Local mirror revision date updated only. |

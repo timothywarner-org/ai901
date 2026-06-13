@@ -10,7 +10,7 @@
 
 ## Demo
 
-In-portal demo of Azure AI Language and Azure AI Speech surfaces in Foundry Tools.
+In-portal demo of Azure AI Language and Azure AI Speech surfaces in Foundry Tools. A runnable Azure AI Language SDK sample and a one-command deploy script live in [`demo/`](./demo/).
 
 ## Resources
 

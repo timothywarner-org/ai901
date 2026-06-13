@@ -10,7 +10,7 @@
 
 ## Demo
 
-Foundry playground tour: multimodal chat with image input and image generation from a text prompt.
+Foundry playground tour: multimodal chat with image input and image generation from a text prompt. A runnable Azure AI Vision SDK sample, a local Flask web app, and a deploy script live in [`demo/`](./demo/).
 
 ## Resources
 

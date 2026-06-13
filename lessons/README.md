@@ -34,8 +34,8 @@ Every `lesson-NN/` folder follows the same shape:
 ```text
 lesson-NN/
 ├── README.md      # Title, runtime, exam objectives, learning objectives, demo plan, resources
-├── demo/          # Code demonstrated on camera (Python, Bicep, scripts)
+├── demo/          # Runnable code: Python scripts, requirements.txt, .env.example, deploy script, optional webapp/ and samples/
 └── assets/        # Slides, screenshots, sample data referenced in the lesson
 ```
 
-Concept-only lessons (01 -- 07) keep `demo/` for in-portal walkthrough notes. Build lessons (08 -- 16) keep working code in `demo/` -- prefer minimal, runnable, keyless-auth Python.
+Concept lessons 01 -- 03 are portal walkthroughs with no code. Concept lessons 04 -- 07 add a small SDK bookend sample and a one-command deploy script in `demo/` so you can reproduce the walkthrough in code. Build lessons 08 -- 16 keep the headline working code in `demo/` -- minimal, runnable Python, keyless auth wherever the objective allows.

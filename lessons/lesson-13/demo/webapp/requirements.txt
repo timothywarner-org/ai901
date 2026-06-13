@@ -1,0 +1,6 @@
+flask>=3.0.0
+azure-ai-textanalytics>=5.3.0
+azure-identity>=1.16.0
+python-dotenv>=1.0.0
+# Powers the optional Streamlit UI (lesson-13-ui.py)
+streamlit>=1.30.0

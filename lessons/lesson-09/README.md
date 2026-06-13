@@ -10,7 +10,7 @@
 
 ## Demo
 
-Foundry playground: progressive prompt refinement -- bare user prompt, then add a system message, then few-shot, then JSON-schema-constrained output.
+Foundry playground: progressive prompt refinement -- bare user prompt, then add a system message, then few-shot, then JSON-schema-constrained output. The runnable prompt-patterns SDK sample and a one-command deploy script live in [`demo/`](./demo/).
 
 ## Resources
 

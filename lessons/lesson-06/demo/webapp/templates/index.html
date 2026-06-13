@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AI-901 Vision Lab &mdash; Image Analysis 4.0</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}" />
+</head>
+<body>
+  <header class="app-header">
+    <h1>AI-901 Vision Lab</h1>
+    <p class="subtitle">
+      Image Analysis 4.0 &mdash; <strong>Azure AI Vision</strong>.
+      Same <code>ImageAnalysisClient</code> as the Lesson 6 Python SDK sample.
+    </p>
+  </header>
+
+  <main class="layout">
+    <!-- LEFT: controls -->
+    <section class="panel controls" aria-label="Analysis controls">
+      <h2>1. Choose an image</h2>
+
+      <div class="input-mode">
+        <label class="radio-row">
+          <input type="radio" name="mode" value="url" checked />
+          <span>Image URL (service-side fetch)</span>
+        </label>
+        <input
+          type="text"
+          id="image-url"
+          class="text-input"
+          placeholder="https://aka.ms/azsdk/image-analysis/sample.jpg"
+          value="https://aka.ms/azsdk/image-analysis/sample.jpg"
+        />
+
+        <label class="radio-row">
+          <input type="radio" name="mode" value="file" />
+          <span>Upload local file (byte stream)</span>
+        </label>
+        <input type="file" id="image-file" class="file-input" accept="image/*" />
+      </div>
+
+      <h2>2. Choose operations</h2>
+      <p class="hint">
+        Each operation maps to a <code>VisualFeatures</code> enum value.
+        The JSON shape it returns is the exam answer.
+      </p>
+
+      <fieldset class="op-group">
+        <legend>Caption</legend>
+        <label><input type="checkbox" class="feature" value="caption" checked /> Caption (whole image)</label>
+        <label><input type="checkbox" class="feature" value="denseCaptions" /> Dense captions (regions + boxes)</label>
+      </fieldset>
+
+      <fieldset class="op-group">
+        <legend>Detection</legend>
+        <label><input type="checkbox" class="feature" value="objects" checked /> Object detection (boxes)</label>
+        <label><input type="checkbox" class="feature" value="people" /> People detection (boxes)</label>
+      </fieldset>
+
+      <fieldset class="op-group">
+        <legend>OCR</legend>
+        <label><input type="checkbox" class="feature" value="read" checked /> Read / OCR (printed + handwritten)</label>
+      </fieldset>
+
+      <fieldset class="op-group">
+        <legend>Tagging &amp; cropping</legend>
+        <label><input type="checkbox" class="feature" value="tags" /> Tags (label + confidence)</label>
+        <label><input type="checkbox" class="feature" value="smartCrops" /> Smart crops (thumbnails)</label>
+      </fieldset>
+
+      <button id="analyze-btn" class="primary-btn" type="button">Analyze image</button>
+      <p id="status" class="status" role="status" aria-live="polite"></p>
+    </section>
+
+    <!-- RIGHT: results -->
+    <section class="panel results" aria-label="Analysis results">
+      <div class="tab-row" role="tablist">
+        <button class="tab is-active" data-tab="boxes" role="tab" aria-selected="true">Boxes on image</button>
+        <button class="tab" data-tab="pretty" role="tab" aria-selected="false">Pretty results</button>
+        <button class="tab" data-tab="json" role="tab" aria-selected="false">Raw JSON</button>
+      </div>
+
+      <div class="tab-pane is-active" id="tab-boxes" role="tabpanel">
+        <div class="canvas-wrap">
+          <canvas id="overlay" width="640" height="480"></canvas>
+        </div>
+        <ul id="legend" class="legend" aria-label="Bounding box legend"></ul>
+      </div>
+
+      <div class="tab-pane" id="tab-pretty" role="tabpanel">
+        <div id="pretty"></div>
+      </div>
+
+      <div class="tab-pane" id="tab-json" role="tabpanel">
+        <pre id="json-out" class="json-out"></pre>
+      </div>
+    </section>
+  </main>
+
+  <script src="{{ url_for('static', filename='app.js') }}"></script>
+</body>
+</html>

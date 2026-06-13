@@ -1,0 +1,186 @@
+/*
+ * AI-901 Vision Lab -- styles
+ * Layout echoes Vision Studio (controls left, results right) but stays
+ * deliberately neutral so the canvas and JSON are the focus.
+ *
+ * Accessibility: status and error states are signaled by TEXT + WEIGHT +
+ * a left border, never by color alone.
+ */
+
+:root {
+  --ink: #1a1a1a;
+  --muted: #5a5a5a;
+  --line: #d0d0d0;
+  --bg: #fafafa;
+  --panel: #ffffff;
+  --accent: #0b5fff;
+  --accent-ink: #ffffff;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: -apple-system, "Segoe UI", Roboto, sans-serif;
+  color: var(--ink);
+  background: var(--bg);
+  font-size: 15px;
+  line-height: 1.45;
+}
+
+code {
+  font-family: "Cascadia Code", Consolas, monospace;
+  font-size: 0.9em;
+  background: #eef0f3;
+  padding: 1px 5px;
+  border-radius: 3px;
+}
+
+/* Header ----------------------------------------------------------------- */
+.app-header {
+  padding: 16px 24px;
+  border-bottom: 1px solid var(--line);
+  background: var(--panel);
+}
+.app-header h1 { margin: 0 0 2px; font-size: 20px; }
+.subtitle { margin: 0; color: var(--muted); font-size: 13px; }
+
+/* Two-column layout ------------------------------------------------------ */
+.layout {
+  display: grid;
+  grid-template-columns: 360px 1fr;
+  gap: 16px;
+  padding: 16px 24px;
+  align-items: start;
+}
+
+.panel {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 16px;
+}
+
+.controls h2 { font-size: 14px; margin: 18px 0 8px; text-transform: uppercase; letter-spacing: 0.03em; color: var(--muted); }
+.controls h2:first-child { margin-top: 0; }
+
+.hint { font-size: 12px; color: var(--muted); margin: 0 0 10px; }
+
+/* Inputs ----------------------------------------------------------------- */
+.radio-row { display: flex; align-items: center; gap: 8px; margin: 8px 0 4px; font-size: 14px; }
+.text-input,
+.file-input {
+  width: 100%;
+  padding: 8px 10px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  font-size: 13px;
+  margin-bottom: 8px;
+}
+.text-input { font-family: "Cascadia Code", Consolas, monospace; }
+
+.op-group {
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 8px 12px 10px;
+  margin: 0 0 10px;
+}
+.op-group legend { font-weight: 600; font-size: 12px; padding: 0 4px; }
+.op-group label { display: flex; align-items: center; gap: 8px; font-size: 13px; padding: 3px 0; }
+
+/* Primary action --------------------------------------------------------- */
+.primary-btn {
+  width: 100%;
+  padding: 11px;
+  background: var(--accent);
+  color: var(--accent-ink);
+  border: none;
+  border-radius: 6px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 4px;
+}
+.primary-btn:hover { filter: brightness(1.08); }
+.primary-btn:disabled { opacity: 0.55; cursor: default; }
+
+/* Status: text + left border carry the meaning, not color alone ---------- */
+.status {
+  margin: 10px 0 0;
+  font-size: 13px;
+  padding: 6px 10px;
+  border-left: 4px solid var(--line);
+  background: #f4f6f8;
+  min-height: 18px;
+}
+.status-error {
+  border-left-color: var(--ink);
+  border-left-style: double;
+  font-weight: 700;
+  background: #fdecec;
+}
+.status-error::before { content: "ERROR: "; }
+
+/* Results panel ---------------------------------------------------------- */
+.results { padding: 0; overflow: hidden; }
+
+.tab-row { display: flex; border-bottom: 1px solid var(--line); }
+.tab {
+  flex: 0 0 auto;
+  padding: 11px 18px;
+  background: transparent;
+  border: none;
+  border-bottom: 3px solid transparent;
+  font-size: 14px;
+  cursor: pointer;
+  color: var(--muted);
+}
+.tab.is-active {
+  color: var(--ink);
+  font-weight: 700;
+  border-bottom-color: var(--accent);
+}
+
+.tab-pane { display: none; padding: 16px; }
+.tab-pane.is-active { display: block; }
+
+/* Canvas ----------------------------------------------------------------- */
+.canvas-wrap {
+  display: inline-block;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: #fff;
+  line-height: 0;
+}
+#overlay { display: block; max-width: 100%; }
+
+.legend { list-style: none; padding: 0; margin: 12px 0 0; font-size: 13px; }
+.legend li { display: flex; align-items: center; gap: 8px; padding: 3px 0; }
+.swatch {
+  display: inline-block;
+  width: 22px;
+  height: 12px;
+  border-width: 2px;
+  border-radius: 2px;
+}
+
+/* Pretty pane ------------------------------------------------------------ */
+#pretty h3 { font-size: 14px; margin: 14px 0 4px; }
+#pretty h3:first-child { margin-top: 0; }
+#pretty ul { margin: 0 0 8px; padding-left: 20px; }
+#pretty li { font-size: 13px; padding: 1px 0; }
+
+/* JSON pane -------------------------------------------------------------- */
+.json-out {
+  margin: 0;
+  font-family: "Cascadia Code", Consolas, monospace;
+  font-size: 12.5px;
+  line-height: 1.5;
+  white-space: pre;
+  overflow: auto;
+  max-height: 70vh;
+  background: #1e1e1e;
+  color: #d4d4d4;
+  padding: 14px;
+  border-radius: 6px;
+}

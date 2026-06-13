@@ -38,9 +38,12 @@ Per [`docs/outline.pdf`](docs/outline.pdf):
 | 01 -- 07 | AI workloads, Responsible AI, text/speech/vision/extraction concepts | Domain 1 -- Identify AI concepts and capabilities (40 -- 45%) |
 | 08 -- 16 | Foundry portal, prompts, SDK, agents, text/speech/vision/extraction apps | Domain 2 -- Implement AI solutions by using Microsoft Foundry (55 -- 60%) |
 
-Lessons 01 -- 07 are **concept** lessons -- portal walkthroughs, no shipping code. Lessons 08 -- 16 are
-**build** lessons -- each has a runnable Python sample under `lessons/lesson-NN/demo/`. Do not blur the
-line: do not add code demos to concept lessons or strip them from build lessons.
+Lessons 01 -- 03 are pure **concept** lessons -- portal walkthroughs with no shipping code. Lessons 04 -- 07
+are concept lessons that also ship a small **SDK bookend** sample and a one-command deploy script under
+`lessons/lesson-NN/demo/`, so a learner can reproduce the portal walkthrough in code (lesson 04 ships only the
+Responsible AI provisioning script). Lessons 08 -- 16 are **build** lessons -- each has a runnable Python
+sample under `lessons/lesson-NN/demo/`. Keep the spirit: do not add gratuitous code to a concept lesson, and
+do not strip the headline build from a build lesson.
 
 Per-lesson learning objectives are lifted verbatim from `docs/outline.pdf`. The exam objective IDs and weights
 are mirrored from `docs/ai901-objective-domain.md`.
@@ -60,7 +63,7 @@ ai901/
 │   ├── README.md                                # Lessons index + domain map
 │   └── lesson-NN/                               # lesson-01 through lesson-16
 │       ├── README.md                            # Five-section lesson contract (see below)
-│       ├── demo/                                # On-camera code (build) or walkthrough notes (concept)
+│       ├── demo/                                # Runnable scripts, requirements.txt, .env.example, deploy script, optional webapp/ and samples/
 │       └── assets/                              # Slides, screenshots, sample inputs
 │
 ├── docs/
@@ -96,8 +99,9 @@ Every `lessons/lesson-NN/README.md` has the same five sections in this order:
 2. **Runtime + exam objectives** -- one bold line: `**Runtime:** 30 min | **Exam objectives:** X.Y.Z`.
 3. **Learning objectives** -- bullet list lifted verbatim from `docs/outline.pdf`. Do not paraphrase; the
    outline is the deliverable spec.
-4. **Demo** -- one short paragraph describing what is shown on camera. Concept lessons (01 -- 07) describe
-   a portal tour; build lessons (08 -- 16) point to `demo/` for runnable code.
+4. **Demo** -- one short paragraph describing what the lesson demonstrates. Concept lessons 01 -- 03 describe
+   a portal tour; lessons 04 -- 16 also point to `demo/` for runnable code (a provisioning script for 04, an
+   SDK bookend for 05 -- 07, a full build for 08 -- 16).
 5. **Resources** -- bullets to Microsoft Learn primary sources.
 
 Keep these five headings stable across all 16 lessons so a learner can scan any folder identically. When a
@@ -168,15 +172,18 @@ agent.
 
 ## Build-lesson code conventions
 
-Lessons 08 -- 16 ship working samples. Keep them classroom-friendly:
+Lessons 05 -- 16 ship runnable samples -- lessons 05 -- 07 add a small SDK bookend to the concept
+walkthrough, and lessons 08 -- 16 are full builds (lesson 04 ships only a Responsible AI provisioning
+script). Keep them classroom-friendly:
 
 - **Python 3.12** for client samples unless a lesson explicitly needs another language.
-- **Keyless auth** -- use `DefaultAzureCredential` from `azure.identity` and Microsoft Foundry Entra-based
-  auth. Never check in API keys; use `.env.example` for documented settings, never `.env`.
+- **Auth** -- lessons 10 -- 16 use keyless `DefaultAzureCredential` (Microsoft Entra) wherever the objective
+  allows; the early concept bookends (lessons 05 -- 09) read a key from `.env` for Fundamentals simplicity.
+  Never check in API keys or `.env`; ship `.env.example` only.
 - **Per-lesson `requirements.txt`** -- pin only what the lesson actually imports under
   `lessons/lesson-NN/demo/`. Do not introduce a monorepo lockfile or shared virtualenv across lessons.
 - **One concept per demo** -- a lesson demo illustrates exactly the learning objective it maps to. Resist
-  adding "while we are here" features; they hurt on-camera pacing.
+  adding "while we are here" features; they dilute the lesson and the matching exam objective.
 - **Cleanup mandatory** -- if a demo provisions Azure resources, include teardown steps in the lesson
   README. The course assumes a learner has a single Foundry project they reuse across all build lessons,
   not 16 disposable subscriptions.

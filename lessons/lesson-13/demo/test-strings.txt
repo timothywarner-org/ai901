@@ -1,0 +1,86 @@
+=============================================================================
+ LESSON 13 -- TEST STRINGS  (copy/paste only)
+ Paste these into the web app text box or pass them to the SDK scripts.
+ Keyless auth -- no secrets in this file.
+=============================================================================
+
+
+-----------------------------------------------------------------------------
+1) TAILSPIN PRO DRONE REVIEW   (entities, key phrases, sentiment + opinion mining)
+   The headline sample
+-----------------------------------------------------------------------------
+I bought the Tailspin Pro Drone from Maria Rodriguez at the Seattle store on
+April 12. The battery life is excellent and the camera quality is sharp.
+Unfortunately the GPS lock is unreliable in dense urban areas, and the included
+carrying case is flimsy. I would still recommend it for hobbyists.
+
+   What to look for in the output:
+     Entities      -> Tailspin Pro Drone (Product), Maria Rodriguez (Person),
+                      Seattle (Location), April 12 (DateTime)
+     Opinions      -> (battery life, excellent)->positive ; (GPS lock, unreliable)->negative ;
+                      (carrying case, flimsy)->negative
+     Doc sentiment -> mixed
+
+
+-----------------------------------------------------------------------------
+2) FABRIKAM SUPPORT THREAD   (extractive vs. abstractive summarization)
+   A longer document worth condensing
+-----------------------------------------------------------------------------
+A customer at our Bellevue branch reported their Fabrikam Industrial Pump model
+FB-2200 lost prime three times during a single shift on April 18. The on-site
+technician inspected the suction line and found a hairline crack in the foot
+valve, which was replaced under warranty. The customer also noted that the
+integrated flow sensor had been reporting intermittent zero readings for the
+prior two weeks, suggesting a related issue. Engineering opened ticket
+FB-WARRANTY-7741 to track both the foot-valve replacement and the sensor
+investigation. The customer requested expedited shipping on a spare foot valve
+and a written summary of the incident for their internal maintenance log.
+Resolution is expected within ten business days.
+
+
+-----------------------------------------------------------------------------
+3) PII-RICH SUPPORT MESSAGE   (recognize_pii_entities redaction --
+   email, phone, name, and a card number all get masked)
+-----------------------------------------------------------------------------
+Hi, this is Maria Rodriguez. You can reach me at maria.rodriguez@contoso.com or
+on (206) 555-0142. I am following up on order F-7781 -- the card ending
+4242 4242 4242 4242 was charged twice. Please call me back today.
+
+
+-----------------------------------------------------------------------------
+4) MULTILINGUAL SNIPPETS   (detect_language returns the ISO code +
+   confidence -- paste one at a time)
+-----------------------------------------------------------------------------
+Bonjour, j'adore mon nouveau drone Tailspin Pro, mais le verrouillage GPS est peu fiable.
+
+Hola, la duracion de la bateria es excelente y la camara es nitida.
+
+Guten Tag, die Akkulaufzeit ist hervorragend, aber die Tragetasche ist instabil.
+
+
+=============================================================================
+ POCKET CARDS  (keep on a second monitor while you practice)
+=============================================================================
+
+--- Sync vs. async skills ---
+Sync (return immediately):
+  recognize_entities        -- typed named entities + categories
+  recognize_pii_entities    -- PII detection + redaction
+  extract_key_phrases       -- salient terms (untyped)
+  analyze_sentiment         -- doc + sentence + aspect (opinion mining)
+  detect_language           -- ISO language code + confidence
+Async LRO (return a poller -- call .result()):
+  begin_extract_summary     -- verbatim source sentences
+  begin_abstract_summary    -- paraphrased novel sentences
+
+--- Aspect-based sentiment ---
+analyze_sentiment(docs, show_opinion_mining=True) -> 3 tiers:
+  1. Document sentiment   (positive/negative/neutral/mixed)
+  2. Sentence sentiment
+  3. Mined opinions       (target, assessment) pairs explaining WHY
+For AI-901 today:
+  show_opinion_mining=True is THE answer.
+
+--- Extractive vs. abstractive summary ---
+Auditable / compliance / legal       -> Extractive  (begin_extract_summary)
+Reads like human prose / exec digest -> Abstractive (begin_abstract_summary)

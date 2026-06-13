@@ -10,7 +10,7 @@
 
 ## Demo
 
-Live deployment of a small chat model from the Foundry catalog into a Foundry project, then a playground round trip.
+Live deployment of a small chat model from the Foundry catalog into a Foundry project, then a playground round trip. The runnable Microsoft Foundry SDK chat sample and a one-command deploy script live in [`demo/`](./demo/).
 
 ## Resources
 
